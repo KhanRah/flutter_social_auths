@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:social_auths/screens/dashboardpage.dart';
 import 'package:social_auths/screens/loginpage.dart';
-
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 class AuthService {
   //Handles Auth
   handleAuth() {
@@ -17,6 +17,7 @@ class AuthService {
           }
         });
   }
+
 
   //Sign out
   signOut() {
@@ -38,7 +39,6 @@ class AuthService {
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
   Future<String> signInWithGoogle() async {
-
 
 
     final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
