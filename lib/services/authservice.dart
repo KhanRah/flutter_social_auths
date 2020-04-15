@@ -11,8 +11,10 @@ class AuthService {
         stream: FirebaseAuth.instance.onAuthStateChanged,
         builder: (BuildContext context, snapshot) {
           if (snapshot.hasData) {
+            print('SnapShot in if$snapshot ${snapshot.data}');
             return DashboardPage();
           } else {
+            print('SnapShot in else$snapshot ${snapshot.data}');
             return LoginPage();
           }
         });
@@ -25,8 +27,10 @@ class AuthService {
   }
 
   //SignIn
-  signIn(AuthCredential authCreds) {
-    FirebaseAuth.instance.signInWithCredential(authCreds);
+  signIn(AuthCredential authCreds)async {
+    final AuthResult authResult =await FirebaseAuth.instance.signInWithCredential(authCreds);
+    final FirebaseUser user = authResult.user;
+    print('result ${user.displayName},${user.email},${user.photoUrl},${user.uid},');
   }
 
   signInWithOTP(smsCode, verId) {
@@ -34,6 +38,7 @@ class AuthService {
         verificationId: verId, smsCode: smsCode);
     signIn(authCreds);
   }
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -65,8 +70,46 @@ class AuthService {
   }
 
   void signOutGoogle() async{
+    await _auth.signOut();
     await googleSignIn.signOut();
     print("User Sign Out");
+  }
+
+
+
+  FacebookLogin facebookLogin = FacebookLogin();
+  Future<FacebookLoginResult> _handleFBSignIn() async {
+
+    FacebookLoginResult facebookLoginResult =
+    await facebookLogin.logInWithReadPermissions(['email']);
+    switch (facebookLoginResult.status) {
+      case FacebookLoginStatus.cancelledByUser:
+        print("Cancelled");
+        break;
+      case FacebookLoginStatus.error:
+        print("error");
+        break;
+      case FacebookLoginStatus.loggedIn:
+        print("Logged In");
+        break;
+    }
+    return facebookLoginResult;
+  }
+  Future faceBookLoginfsvf()async
+  {
+    FacebookLoginResult facebookLoginResult = await _handleFBSignIn();
+    final accessToken = facebookLoginResult.accessToken.token;
+    if (facebookLoginResult.status == FacebookLoginStatus.loggedIn) {
+      final facebookAuthCred =
+      FacebookAuthProvider.getCredential(accessToken: accessToken);
+      final user = await _auth.signInWithCredential(facebookAuthCred);
+      print("User :  + ${user.user.displayName}");
+      return facebookLoginResult;
+    }
+  }
+  Future<void> fbsignOut() async {
+    await facebookLogin.logOut();
+    await _auth.signOut();
   }
 
 }

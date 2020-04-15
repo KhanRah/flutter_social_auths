@@ -14,9 +14,10 @@ class _DashboardPageState extends State<DashboardPage> {
             child: RaisedButton(
               child: Text('Signout'),
               onPressed: () {
-//                AuthService().signOut();
-              AuthService().signOutGoogle();
-              Navigator.of(context).pop();
+                AuthService().signOut();
+                AuthService().signOutGoogle();
+                AuthService().fbsignOut();
+                Navigator.of(context).pushNamedAndRemoveUntil('/loginpage', (Route<dynamic> route) => false,);
               },
             )
         )
