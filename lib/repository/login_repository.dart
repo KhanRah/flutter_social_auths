@@ -15,6 +15,6 @@ abstract class LoginRepository implements BaseRepository
   void signInWithInstagram();
   Future signInWithFaceBook();
   void login(simpleAuth.AuthenticatedApi api);
-  void validateMobileNumber(String phone);
+  Future autoValidateMobileNumber(String phone);
   Future signInWithOtp(String value);
 }

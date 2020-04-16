@@ -68,19 +68,21 @@ class LoginBloc implements BaseBloc{
     _loginRepository.login(api);
   }
 
-  void signInWithPhone()
+  void signInWithPhone()async
   {
     var phoneNumber = numberValue;
     var countryCode = countryValue;
     print('$countryCode, $phoneNumber');
-    _loginRepository.validateMobileNumber(countryCode+phoneNumber);
+    FirebaseUser userDetails=await _loginRepository.autoValidateMobileNumber(countryCode+phoneNumber);
+    print('Phone Auth AUTO ${userDetails.phoneNumber}');
+
   }
   void enterOTP()async
   {
     var value = otpValue;
     print('otp value$value');
-    FirebaseUser userDetails= await _loginRepository.signInWithOtp(value);
-    print('Phone Auth ${userDetails.phoneNumber}');
+    FirebaseUser userDetails = await _loginRepository.signInWithOtp(value);
+    print('Phone Auth with SMS ${userDetails.phoneNumber}');
   }
 
 }

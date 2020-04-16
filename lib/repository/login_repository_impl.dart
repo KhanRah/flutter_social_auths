@@ -101,7 +101,7 @@ class LoginRepoImplementation implements LoginRepository{
   }
 
   @override
-  void validateMobileNumber(String phone)async {
+  Future<FirebaseUser> autoValidateMobileNumber(String phone)async {
     final PhoneVerificationCompleted verified = (AuthCredential authResult) {
       _firebaseAuth.signInWithCredential(authResult);
     };
@@ -127,6 +127,9 @@ class LoginRepoImplementation implements LoginRepository{
         verificationFailed: verificationfailed,
         codeSent: smsSent,
         codeAutoRetrievalTimeout: autoTimeout);
+    final FirebaseUser currentUser = await _firebaseAuth.currentUser();
+    print('Current User$currentUser');
+    return currentUser;
   }
 
   @override
