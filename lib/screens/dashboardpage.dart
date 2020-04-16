@@ -15,8 +15,6 @@ class _DashboardPageState extends State<DashboardPage> {
               child: Text('Signout'),
               onPressed: () {
 //                AuthService().signOut();
-              AuthService().signOutGoogle();
-              Navigator.of(context).pop();
               },
             )
         )

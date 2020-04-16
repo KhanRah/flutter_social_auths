@@ -135,6 +135,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_webview_plugin:
+    dependency: "direct main"
+    description:
+      name: flutter_webview_plugin
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.11"
   google_sign_in:
     dependency: "direct main"
     description:
@@ -157,7 +164,7 @@ packages:
     source: hosted
     version: "0.8.4"
   http:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http
       url: "https://pub.dartlang.org"
@@ -233,6 +240,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
+  rxdart:
+    dependency: "direct main"
+    description:
+      name: rxdart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.24.0"
+  simple_auth:
+    dependency: transitive
+    description:
+      name: simple_auth
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.5"
+  simple_auth_flutter:
+    dependency: "direct main"
+    description:
+      name: simple_auth_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.4"
   sky_engine:
     dependency: transitive
     description: flutter

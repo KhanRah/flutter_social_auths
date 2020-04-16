@@ -26,6 +26,10 @@ dependencies:
   firebase_auth: ^0.15.5+3
   google_sign_in:
   flutter_facebook_login: ^1.1.1
+  http:
+  flutter_webview_plugin:
+  simple_auth_flutter: ^2.0.4
+  rxdart:
 
 dev_dependencies:
   flutter_test:
